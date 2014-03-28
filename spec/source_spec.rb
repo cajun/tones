@@ -7,21 +7,14 @@ describe Tones do
   end
 
   it 'should respond to next_window' do
-    setup_subject "clean_sin/150.wav"
+    @subject = Tones::FileSource.sample_sin_150
     @subject.must_respond_to :next_window
   end
 
   it 'should return a chunk of sound to analize' do
-    setup_subject "clean_sin/150.wav"
+    @subject = Tones::FileSource.sample_sin_150
     chunk = @subject.next_window
-    chunk.class.must_equal Array
-  end
-
-
-
-  def setup_subject file
-    path = Dir.pwd + Dir.pwd + "spec/sample/" + file
-    @subject = Tones::FileSource.new path
+    chunk.class.must_equal Tones::Window
   end
 
 
