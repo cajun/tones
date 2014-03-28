@@ -14,20 +14,26 @@ describe Tones do
   end
 
 
-  it 'next pitch should be 150' do
-    source = Tones::FileSource.sample_sin_150
-    subject = Tones::Detector.new source
-    subject.next_pitch.must_equal 150.0
+  tones = [150,500,275,440]
+  tones.each do |tone|
+
+    it "next pitch should be #{tone}" do
+      build_subject "clean_sin/#{tone}.wav"
+      assert_in_delta tone, @subject.next_pitch, 0.03
+    end
+
+    it "next pitch should be #{tone} with noice" do
+      build_subject "noice_sin/#{tone}.wav"
+      assert_in_delta tone, @subject.next_pitch, 1.50
+    end
+
   end
 
-  it 'next pitch should be 500' do
-    source = Tones::FileSource.sample_sin_500
-    subject = Tones::Detector.new source
-    assert_in_delta 500, subject.next_pitch, 0.03
-  end
 
-  def should_be_close a,b
-    Math.abs( a - b ).must_
+  def build_subject file
+    path = "#{Dir.pwd}/spec/sample/#{file}"
+    source = Tones::FileSource.new path
+    @subject = Tones::Detector.new source
   end
 
 
