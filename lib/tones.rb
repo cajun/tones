@@ -1,6 +1,8 @@
 require 'rubygems'
 
 require 'tones/version'
+require 'tones/file_source'
+require 'tones/detector'
 
 module Tones
 
