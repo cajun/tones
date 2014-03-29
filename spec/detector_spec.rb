@@ -19,12 +19,12 @@ describe Tones do
 
     it "next pitch should be #{tone}" do
       build_subject "clean_sin/#{tone}.wav"
-      assert_in_delta tone, @subject.next_pitch, 0.03
+      assert_in_delta tone, @subject.next_pitch, 0.05
     end
 
     it "next pitch should be #{tone} with noice" do
       build_subject "noice_sin/#{tone}.wav"
-      assert_in_delta tone, @subject.next_pitch, 1.50
+      assert_in_delta tone, @subject.next_pitch, 0.7
     end
 
   end
