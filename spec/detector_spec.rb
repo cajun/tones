@@ -18,13 +18,13 @@ describe Tones do
   tones.each do |tone|
 
     it "next pitch should be #{tone}" do
-      build_subject "clean_sin/#{tone}.wav"
-      assert_in_delta tone, @subject.next_pitch, 0.05
+      subject = build_subject "clean_sin/#{tone}.wav"
+      assert_in_delta tone, subject.next_pitch, 0.05
     end
 
     it "next pitch should be #{tone} with noice" do
-      build_subject "noice_sin/#{tone}.wav"
-      assert_in_delta tone, @subject.next_pitch, 0.7
+      subject = build_subject "noice_sin/#{tone}.wav"
+      assert_in_delta tone, subject.next_pitch, 0.7
     end
 
   end
@@ -33,7 +33,7 @@ describe Tones do
   def build_subject file
     path = "#{Dir.pwd}/spec/sample/#{file}"
     source = Tones::FileSource.new path
-    @subject = Tones::Detector.new source
+    Tones::Detector.new source
   end
 
 

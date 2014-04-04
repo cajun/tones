@@ -2,12 +2,7 @@ require 'wavefile'
 
 module Tones
 
-
   Window = Struct.new("Window", :sample, :rate)
-
-
-
-
 
   class FileSource
 
@@ -27,14 +22,16 @@ module Tones
     end
 
 
-    def self.sample_sin_150
-      path = Dir.pwd + "/spec/sample/clean_sin/150.wav"
-      Tones::FileSource.new path
-    end
+    class << self
+      def sample_sin_150
+        path = Dir.pwd + "/spec/sample/clean_sin/150.wav"
+        Tones::FileSource.new path
+      end
 
-    def self.sample_sin_500
-      path = Dir.pwd + "/spec/sample/clean_sin/500.wav"
-      Tones::FileSource.new path
+      def sample_sin_500
+        path = Dir.pwd + "/spec/sample/clean_sin/500.wav"
+        Tones::FileSource.new path
+      end
     end
 
 
